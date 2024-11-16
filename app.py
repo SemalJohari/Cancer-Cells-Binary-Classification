@@ -46,16 +46,23 @@ def page():
 page()
 display_instruction_window()
 
-# Dropdowns for selecting unique values of the features
-clump = st.selectbox('Select Clump Thickness', clump_values)
-unif_size = st.selectbox('Select Uniformity of Cell Size', unif_size_values)
-unif_shape = st.selectbox('Select Uniformity of Cell Shape', unif_shape_values)
-marg_adh = st.selectbox('Select Marginal Adhesion', marg_adh_values)
-sing_epi_size = st.selectbox('Select Single Epithelial Cell Size', sing_epi_size_values)
-bare_nuc = st.selectbox('Select Bare Nuclei', bare_nuc_values)
-bland_chrom = st.selectbox('Select Bland Chromatin', bland_chrom_values)
-norm_nucl = st.selectbox('Select Normal Nucleoli', norm_nucl_values)
-mit = st.selectbox('Select Mitoses', mit_values)
+# Create a 3x3 grid of dropdowns using columns
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    clump = st.selectbox('Clump Thickness', clump_values)
+    unif_size = st.selectbox('Uniformity of Cell Size', unif_size_values)
+    unif_shape = st.selectbox('Uniformity of Cell Shape', unif_shape_values)
+
+with col2:
+    marg_adh = st.selectbox('Marginal Adhesion', marg_adh_values)
+    sing_epi_size = st.selectbox('Single Epithelial Cell Size', sing_epi_size_values)
+    bare_nuc = st.selectbox('Bare Nuclei', bare_nuc_values)
+
+with col3:
+    bland_chrom = st.selectbox('Bland Chromatin', bland_chrom_values)
+    norm_nucl = st.selectbox('Normal Nucleoli', norm_nucl_values)
+    mit = st.selectbox('Mitoses', mit_values)
 
 # Predict button
 if st.button('Predict'):
@@ -80,3 +87,4 @@ if st.button('Predict'):
         st.write('Benign Cell')
     else:
         st.write('Malignant Cell')
+
